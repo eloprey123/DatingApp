@@ -1,3 +1,4 @@
+import { ToastrService } from 'ngx-toastr';
 import { MessageService } from './../../_services/message.service';
 import { MemberService } from './../../_services/member.service';
 import { Member } from './../../_models/member';
@@ -23,6 +24,7 @@ export class MemberDetailComponent implements OnInit {
   constructor(
     private memberService: MemberService,
     private messageService: MessageService,
+    private toastr: ToastrService,
     private route: ActivatedRoute
   ) { }
 
@@ -77,6 +79,12 @@ export class MemberDetailComponent implements OnInit {
 
   selectTab(tabId: number){
     this.memberTabs.tabs[tabId].active = true;
+  }
+
+  addLike(member: Member) {
+    this.memberService.addLike(member.username).subscribe(() => {
+      this.toastr.success(`You have liked ${member.knownAs}`);
+    })
   }
 
 }

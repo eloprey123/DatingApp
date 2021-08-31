@@ -1,3 +1,5 @@
+import { AdminGuard } from './_guards/admin.guard';
+import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
 import { MemberDetailedResolver } from './_resolvers/member-detailed.resolver';
 import { PreventUnsavedChangesGuard } from './_guards/prevent-unsaved-changes.guard';
 import { MemberEditComponent } from './members/member-edit/member-edit.component';
@@ -45,6 +47,11 @@ const routes: Routes = [
         path: 'messages',
         component: MessagesComponent
       },
+      {
+        path: 'admin',
+        component: AdminPanelComponent,
+        canActivate: [AdminGuard]
+      }
     ]
   },
   {
