@@ -26,6 +26,7 @@ export class UserManagementComponent implements OnInit {
     this.adminService.getUsersWithRoles().subscribe(
       users => {
         this.users = users;
+        console.log(users);
       }
     )
   }

@@ -90,6 +90,7 @@ export class MemberService {
       .find((member: Member) => member.username === username);
 
     if (member) {
+      console.log("Was here alerad")
       return of(member);
     }
     return this.http.get<Member>(this.baseUrl + 'users/' + username);
