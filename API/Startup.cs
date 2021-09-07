@@ -21,6 +21,7 @@ using System.Text;
 using API.Extensions;
 using API.Middleware;
 using API.SignalR;
+using Microsoft.AspNetCore.Http.Connections;
 
 namespace API
 {
@@ -72,8 +73,18 @@ namespace API
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-                endpoints.MapHub<PresenceHub>("hubs/presence");
-                endpoints.MapHub<MessageHub>("hubs/message");
+                endpoints.MapHub<PresenceHub>("hubs/presence", options =>
+                {
+                    options.Transports =
+                        HttpTransportType.WebSockets |
+                        HttpTransportType.LongPolling;
+                });
+                endpoints.MapHub<MessageHub>("hubs/message", options =>
+                {
+                    options.Transports =
+                        HttpTransportType.WebSockets |
+                        HttpTransportType.LongPolling;
+                });
                 endpoints.MapFallbackToController("Index", "Fallback");
             });
         }

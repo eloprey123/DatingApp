@@ -9,6 +9,7 @@ import { Message } from '../_models/message';
 import { getPaginatedResult, getPaginationHeaders } from './paginationHelper';
 import { BehaviorSubject } from 'rxjs';
 import { Group } from '../_models/group';
+import * as signalR from '@microsoft/signalr';
 
 @Injectable({
   providedIn: 'root'
@@ -29,7 +30,8 @@ export class MessageService {
     this.busyService.busy();
     this.hubConnection = new HubConnectionBuilder()
       .withUrl(this.hubUrl + 'message?user=' + otherUsername, {
-        accessTokenFactory: () => user.token
+        accessTokenFactory: () => user.token,
+        transport: signalR.HttpTransportType.WebSockets | signalR.HttpTransportType.LongPolling
       })
       .withAutomaticReconnect()
       .build();
