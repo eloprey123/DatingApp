@@ -10,6 +10,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { CollapseModule} from 'ngx-bootstrap/collapse';
 import { TimeagoModule } from 'ngx-timeago';
 
 @NgModule({
@@ -28,6 +29,7 @@ import { TimeagoModule } from 'ngx-timeago';
     PaginationModule.forRoot(),
     ButtonsModule.forRoot(),
     ModalModule.forRoot(),
+    CollapseModule.forRoot(),
     TimeagoModule.forRoot()
   ],
   exports: [
@@ -41,6 +43,7 @@ import { TimeagoModule } from 'ngx-timeago';
     PaginationModule,
     ButtonsModule,
     ModalModule,
+    CollapseModule,
     TimeagoModule
   ]
 })

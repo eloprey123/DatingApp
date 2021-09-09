@@ -12,6 +12,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class NavComponent implements OnInit {
   model: any = {};
+  navbarCollapsed = true;
 
   constructor(
     public accountService: AccountService,
