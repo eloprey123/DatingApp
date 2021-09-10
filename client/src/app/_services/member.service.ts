@@ -90,7 +90,6 @@ export class MemberService {
       .find((member: Member) => member.username === username);
 
     if (member) {
-      console.log("Was here alerad")
       return of(member);
     }
     return this.http.get<Member>(this.baseUrl + 'users/' + username);
@@ -120,7 +119,6 @@ export class MemberService {
   getLikes(likesParams: LikesParams) {
     let params = getPaginationHeaders(likesParams.pageNumber, likesParams.pageSize);
     params = params.append('predicate', likesParams.predicate.toString());
-    console.log(params);
     return getPaginatedResult<Partial<Member[]>>(this.baseUrl + 'likes', params, this.http);
   }
 

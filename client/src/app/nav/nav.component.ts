@@ -1,5 +1,5 @@
 import { AccountService } from './../_services/account.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Observable } from 'rxjs';
 import { User } from '../_models/user';
 import { Router } from '@angular/router';
@@ -12,7 +12,8 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class NavComponent implements OnInit {
   model: any = {};
-  navbarCollapsed = true;
+  @Input() collapsed: boolean;
+  @Output() collapsedChange = new EventEmitter<boolean>();
 
   constructor(
     public accountService: AccountService,
@@ -26,12 +27,25 @@ export class NavComponent implements OnInit {
   login() {
     this.accountService.login(this.model).subscribe(response => {
       this.router.navigateByUrl('/members');
-      console.log(response);
+      this.collapsed = true;
+      this.collapsedChange.emit(this.collapsed);
     });
   }
 
   logout() {
     this.accountService.logout();
+    this.collapsed = true;
+    this.collapsedChange.emit(this.collapsed);
     this.router.navigateByUrl('/');
+  }
+
+  toggled() {
+    this.collapsed = !this.collapsed;
+    this.collapsedChange.emit(this.collapsed);
+  }
+
+  clickCollapse() {
+    this.collapsed = true;
+    this.collapsedChange.emit(this.collapsed);
   }
 }

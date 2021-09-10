@@ -1,7 +1,7 @@
 import { PresenceService } from './_services/presence.service';
 import { AccountService } from './_services/account.service';
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { User } from './_models/user';
 
 @Component({
@@ -10,6 +10,7 @@ import { User } from './_models/user';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
+  collapsed = true;
   title = 'The Dating App';
   users: any;
 
@@ -28,7 +29,10 @@ export class AppComponent implements OnInit {
       this.accountService.setCurrentUser(user);
       this.presence.createHubConnection(user);
     }
+  }
 
+  cout() {
+    this.collapsed = true;
   }
 
 }
