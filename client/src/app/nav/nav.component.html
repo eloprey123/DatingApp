@@ -2,7 +2,6 @@
   <div class="container-fluid">
     <a class="navbar-brand" routerLink="/" (click)="clickCollapse()">Dating App</a>
     <a id="loginlabel" class="navbar-brand" *ngIf="!(accountService.currentUser$ | async) && collapsed" (click)="toggled()">Login</a>
-
     <button class="navbar-toggler" type="button" (click)="toggled()" [attr.aria-expanded]="!collapsed" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>

@@ -26,7 +26,6 @@ export class NavComponent implements OnInit {
   }
 
   login() {
-
     this.accountService.login(this.model).subscribe(response => {
       this.router.navigateByUrl('/members');
       this.collapsed = true;
@@ -51,7 +50,6 @@ export class NavComponent implements OnInit {
       this.collapsed = true;
       this.collapsedChange.emit(this.collapsed);
     }
-
   }
 
 }
