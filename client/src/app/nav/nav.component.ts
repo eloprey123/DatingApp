@@ -1,5 +1,5 @@
 import { AccountService } from './../_services/account.service';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
 import { Observable } from 'rxjs';
 import { User } from '../_models/user';
 import { Router } from '@angular/router';
@@ -22,9 +22,13 @@ export class NavComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    if (window.innerWidth >= 576) {
+      this.collapsed = true;
+    }
   }
 
   login() {
+
     this.accountService.login(this.model).subscribe(response => {
       this.router.navigateByUrl('/members');
       this.collapsed = true;
@@ -50,5 +54,12 @@ export class NavComponent implements OnInit {
       this.collapsedChange.emit(this.collapsed);
     }
 
+  }
+
+  @HostListener("window:resize", []) updateCollapsed() {
+    if (window.innerWidth >= 576) {
+      this.collapsed = true;
+      console.log(this.collapsed);
+    }
   }
 }
