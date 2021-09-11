@@ -7,3 +7,9 @@ img {
   border: 2px solid white;
   display: inline;
 }
+
+@media (min-width: 576px) {
+  #loginlabel {
+    visibility: hidden;
+  }
+}

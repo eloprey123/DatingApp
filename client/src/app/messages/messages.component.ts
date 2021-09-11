@@ -14,7 +14,7 @@ export class MessagesComponent implements OnInit {
   pagination: Pagination;
   container = 'Unread';
   pageNumber = 1;
-  pageSize = 5;
+  pageSize = 16;
   loading = false;
 
   constructor(

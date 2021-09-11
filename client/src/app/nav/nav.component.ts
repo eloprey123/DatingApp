@@ -45,7 +45,10 @@ export class NavComponent implements OnInit {
   }
 
   clickCollapse() {
-    this.collapsed = true;
-    this.collapsedChange.emit(this.collapsed);
+    if (!this.collapsed) {
+      this.collapsed = true;
+      this.collapsedChange.emit(this.collapsed);
+    }
+
   }
 }

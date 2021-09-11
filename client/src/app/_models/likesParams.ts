@@ -2,7 +2,7 @@ import { User } from "./user";
 
 export class LikesParams {
   pageNumber = 1;
-  pageSize = 5;
+  pageSize = 4;
   predicate = 'liked';
 
   constructor() {
