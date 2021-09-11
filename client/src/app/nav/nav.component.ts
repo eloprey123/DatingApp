@@ -22,9 +22,7 @@ export class NavComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    if (window.innerWidth >= 576) {
-      this.collapsed = true;
-    }
+
   }
 
   login() {
@@ -56,10 +54,4 @@ export class NavComponent implements OnInit {
 
   }
 
-  @HostListener("window:resize", []) updateCollapsed() {
-    if (window.innerWidth >= 576) {
-      this.collapsed = true;
-      console.log(this.collapsed);
-    }
-  }
 }
