@@ -42,6 +42,7 @@ export class NavComponent implements OnInit {
 
   toggled() {
     this.collapsed = !this.collapsed;
+    console.log(this.collapsed);
     this.collapsedChange.emit(this.collapsed);
   }
 
@@ -50,6 +51,12 @@ export class NavComponent implements OnInit {
       this.collapsed = true;
       this.collapsedChange.emit(this.collapsed);
     }
+  }
+
+  status() {
+    if (this.collapsed)
+      this.collapsed = false;
+    console.log(this.collapsed);
   }
 
 }

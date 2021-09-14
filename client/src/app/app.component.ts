@@ -10,7 +10,7 @@ import { User } from './_models/user';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  collapsed: boolean;
+  collapsed = true;
   title = 'The Dating App';
   users: any;
 
@@ -18,7 +18,6 @@ export class AppComponent implements OnInit {
     private accountService: AccountService,
     private presence: PresenceService
   ) {
-    this.collapsed = true;
   }
 
   ngOnInit() {
@@ -37,14 +36,12 @@ export class AppComponent implements OnInit {
     if (!this.collapsed) {
       this.collapsed = true;
     }
-
+    console.log(this.collapsed);
   }
 
   @HostListener("window:resize", []) updateCollapsed() {
-    if (window.innerWidth >= 576) {
-      this.collapsed = true;
-      console.log(this.collapsed);
-    }
+    this.collapsed = true
+    console.log(this.collapsed);
   }
 
 }
