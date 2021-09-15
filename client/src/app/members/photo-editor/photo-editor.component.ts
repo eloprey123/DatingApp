@@ -1,3 +1,4 @@
+import { ConfirmService } from './../../_services/confirm.service';
 import { Photo } from './../../_models/photo';
 import { MemberService } from './../../_services/member.service';
 import { map, take } from 'rxjs/operators';
@@ -22,6 +23,7 @@ export class PhotoEditorComponent implements OnInit {
 
   constructor(
     private accountService: AccountService,
+    private confirmService: ConfirmService,
     private memberService: MemberService
   ) {
     accountService.currentUser$.pipe(take(1)).subscribe(
@@ -80,9 +82,14 @@ export class PhotoEditorComponent implements OnInit {
   }
 
   deletePhoto(photoId: number) {
-    this.memberService.deletePhoto(photoId).subscribe(() => {
-      this.member.photos = this.member.photos.filter(x => x.id !== photoId);
-    });
+    this.confirmService.confirm('Confirm Delete Photo', 'Remove Photo')
+      .subscribe(result => {
+        if (result) {
+          this.memberService.deletePhoto(photoId).subscribe(() => {
+            this.member.photos = this.member.photos.filter(x => x.id !== photoId);
+          });
+        }
+      });
   }
 
 }

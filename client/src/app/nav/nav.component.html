@@ -1,11 +1,14 @@
 <nav class="navbar navbar-expand-sm navbar-dark fixed-top bg-primary">
   <div class="container-fluid">
     <a class="navbar-brand" routerLink="/" (click)="clickCollapse()">Dating App</a>
-    <a id="loginlabel" class="navbar-brand" *ngIf="!(accountService.currentUser$ | async) && collapsed" (click)="toggled()">Login</a>
-    <button class="navbar-toggler" type="button" (click)="toggled()" [attr.aria-expanded]="!collapsed" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+    <button #toggleButton class="navbar-toggler" type="button"
+      (click)="toggled()" aria-controls="navbarCollapse"
+      aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="navbar-collapse collapse" [collapse]="collapsed" [isAnimated]="true" id="navbarCollapse" style>
+    <div #navbarCollapse class="navbar-collapse collapse"
+      [collapse]="collapsed" [isAnimated]="true"
+      id="navbarCollapse" style>
       <ul class="navbar-nav me-auto mb-2 mb-md-0">
         <ng-container *ngIf="accountService.currentUser$ | async">
           <li class="nav-item" >
@@ -19,6 +22,12 @@
           </li>
           <li *appHasRole='["Admin", "Moderator"]' class="nav-item">
             <a class="nav-link" (click)="clickCollapse()" routerLink="/admin" routerLinkActive="active">Admin</a>
+          </li>
+          <li class="nav-item">
+            <a routerLink="/member/edit" (click)="clickCollapse()" class="nav-link" routerLinkActive="active">Edit Profile</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" (click)="logout() && clickCollapse()" routerLinkActive="active">Logout</a>
           </li>
         </ng-container>
         <!-- <li class="nav-item">
@@ -43,14 +52,9 @@
           placeholder="Password">
         <button class="btn btn-success" [disabled]="!loginForm.valid" type="submit">Login</button>
       </form>
-      <div class="dropdown" *ngIf="(accountService.currentUser$ | async) as user" dropdown>
-        <img src="{{user.photoUrl || './assets/user.png'}}" alt="{{user.username}}" class="mr-2">
-        <a class="dropdown-toggle text-light" (click)="status()" dropdownToggle>Welcome {{ user.knownAs || user.username | titlecase }}</a>
-        <div class="dropdown-menu mt-3" *dropdownMenu>
-          <a routerLink="/member/edit" (click)="clickCollapse()" class="drop-down-item">Edit Profile</a>
-          <div class="dropdown-divider"></div>
-          <a class="drop-down-item" (click)="logout() && clickCollapse()" href="#">Logout</a>
-        </div>
+      <div *ngIf="(accountService.currentUser$ | async) as user">
+        <img src="{{user.photoUrl || './assets/user.png'}}" alt="{{user.username}}" class="rounded-circle mr-2">
+        <a>Welcome {{ user.knownAs || user.username | titlecase }}</a>
       </div>
     </div>
 

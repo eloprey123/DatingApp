@@ -10,7 +10,7 @@ import { User } from './_models/user';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  collapsed = true;
+  // collapsed = true;
   title = 'The Dating App';
   users: any;
 
@@ -32,16 +32,16 @@ export class AppComponent implements OnInit {
     }
   }
 
-  cout() {
-    if (!this.collapsed) {
-      this.collapsed = true;
-    }
-    console.log(this.collapsed);
-  }
+  // cout() {
+  //   if (!this.collapsed) {
+  //     this.collapsed = true;
+  //   }
+  //   console.log(this.collapsed);
+  // }
 
-  @HostListener("window:resize", []) updateCollapsed() {
-    this.collapsed = true
-    console.log(this.collapsed);
-  }
+  // @HostListener("window:resize", []) updateCollapsed() {
+  //   this.collapsed = true
+  //   console.log(this.collapsed);
+  // }
 
 }
