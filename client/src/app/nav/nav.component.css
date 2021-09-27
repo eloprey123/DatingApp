@@ -13,3 +13,20 @@ img {
     visibility: hidden;
   }
 }
+
+.wave-nav {
+  aspect-ratio: 1200/60;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  position: relative;
+}
+
+.wave-layer {
+  background-image: url('../../assets/wave-nav.svg');
+  width: 100%;
+}
+
+.holder {
+  position: relative;
+}
