@@ -13,7 +13,7 @@ namespace API.Services
     {
         private readonly string _redisUrl;
         private readonly string _redisPassword;
-        private readonly int _redisPort;
+        private readonly string _redisPort;
 
         private ConnectionMultiplexer _redis;
         public RedisService(IOptions<RedisSettings> config)
