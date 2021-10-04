@@ -5,6 +5,7 @@ using API.DTOs;
 using API.Entities;
 using API.Extensions;
 using API.Interfaces;
+using API.Services;
 using AutoMapper;
 using Microsoft.AspNetCore.SignalR;
 
@@ -12,16 +13,18 @@ namespace API.SignalR
 {
     public class MessageHub : Hub
     {
+        private readonly RedisService _redisService;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IHubContext<PresenceHub> _presenceHub;
         private readonly PresenceTracker _tracker;
 
         private readonly IMapper _mapper;
-        public MessageHub(IUnitOfWork unitOfWork, IMapper mapper,
+        public MessageHub(RedisService redisService, IUnitOfWork unitOfWork, IMapper mapper,
             IHubContext<PresenceHub> presenceHub,
             PresenceTracker tracker)
         {
             _presenceHub = presenceHub;
+            _redisService = redisService;
             _unitOfWork = unitOfWork;
             _mapper = mapper;
             _tracker = tracker;
@@ -86,7 +89,9 @@ namespace API.SignalR
         }
         else
         {
-            var connections = await _tracker.GetConnectionsForUser(recipient.UserName);
+            // var connections = await _tracker.GetConnectionsForUser(recipient.UserName);
+            var connections = await _redisService.GetConnectionsForUser(recipient.UserName);
+
             if (connections != null)
             {
                 await _presenceHub.Clients.Clients(connections).SendAsync("NewMessageReceived",

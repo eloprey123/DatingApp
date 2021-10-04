@@ -12,7 +12,6 @@
 .member-tabset > .nav-tabs > li.open > a, .member-tabset > .nav-tabs > li:hover > a {
   border: 0;
   background: none !important;
-  color: #333333;
 }
 
 .member-tabset > .nav-tabs > li.open > a > i, .member-tabset > .nav-tabs > li:hover > a > i {
@@ -24,7 +23,7 @@
 }
 
 .member-tabset > .nav-tabs > li.active {
-  border-bottom: 4px solid #E95423;
+  border-bottom: 4px solid #e83283;
   position: relative;
 }
 
@@ -42,4 +41,8 @@
   border: 0;
   border-top: 1px solid #eee;
   padding: 15px 0;
+}
+
+.member-tabset > .nav-tabs > .nav-item > .nav-link.active:hover {
+  color: #eee;
 }

@@ -7,6 +7,7 @@ using API.SignalR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using StackExchange.Redis;
 
 namespace API.Extensions
 {
@@ -16,6 +17,8 @@ namespace API.Extensions
         {
             services.AddSingleton<PresenceTracker>();
             services.Configure<CloudinarySettings>(config.GetSection("CloudinarySettings"));
+            services.Configure<RedisSettings>(config.GetSection("RedisSettings"));
+            services.AddSingleton<RedisService>();
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IPhotoService, PhotoService>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
@@ -57,7 +60,7 @@ namespace API.Extensions
                 // or from the environment variable from Heroku, use it to set up your DbContext.
                 options.UseNpgsql(connStr);
             });
-
+            
             return services;
         }
     }
