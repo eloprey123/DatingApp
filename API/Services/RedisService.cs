@@ -28,6 +28,7 @@ namespace API.Services
             try
             {
                 var configString = $"{_redisUrl}:{_redisPort},password={_redisPassword}";
+                Console.WriteLine("Config String: " + configString);
                 _redis = ConnectionMultiplexer.Connect(configString);
             }
             catch (RedisConnectionException ex)
